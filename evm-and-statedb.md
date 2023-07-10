@@ -9,7 +9,7 @@ The transactions in the block will be executed sequentially. The specific execut
 
 #### ApplyMessage
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/bf07e0a6-6e30-456a-9209-b630174acd93/jacksen_state_expiry-ss-evm-applymsg.png)
+![](assets/jacksen_state_expiry-ss-evm-applymsg.png)
 
 When executing a specific transaction, if there is a WitnessList, it will revive the state first. When the execution fails, the revert operation will restore all the states to the version before execution.
 
@@ -17,7 +17,7 @@ When executing a specific transaction, if there is a WitnessList, it will revive
 
 #### Finalize
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/3a14bd39-482e-40b7-b3c6-0ef4441ae85b/jacksen_state_expiry-ss-evm-finalise.png)
+![](assets/jacksen_state_expiry-ss-evm-finalise.png)
 
 When the transaction is successfully executed, all dirty states will be changed to pending state, and subsequent transactions can share all previous changes, but at this time it will not affect the underlying DB.
 
@@ -25,7 +25,7 @@ When the transaction is successfully executed, all dirty states will be changed 
 
 #### Commit
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/2da83bd2-2249-4308-9840-0f46fab6ed50/jacksen_state_expiry-ss-evm-commit.png)
+![](assets/jacksen_state_expiry-ss-evm-commit.png)
 
 When all transactions in the block are executed and the block meets the submission requirements, such as sync verification or mining seal, all pending states will be submitted to the underlying DB.
 

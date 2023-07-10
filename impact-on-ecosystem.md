@@ -4,7 +4,7 @@ The State Expiry solution has changed the storage paradigm of on-chain data, and
 
 ## LightClient
 
-Light Client is compatible in most scenarios. When querying get\_proof, in order to indicate to the user which states have expired, it is necessary to provide the proof of Shadow Tree at the same time.
+Light Client is compatible in most scenarios. When querying `get\_proof`, in order to indicate to the user which states have expired, it is necessary to provide the proof of Shadow Tree at the same time.
 
 ## Sync
 
@@ -16,7 +16,7 @@ For Full Sync, there are not many changes, because Full Sync can always be execu
 
 ## Wallet
 
-The wallet is the user entrance. Due to the introduction of new transaction types, ReviveStateTx, and new RPC APIs, such as eth\_estimateGasAndReviveState, the existing wallet needs to support the generation of Witness in the expired state and send ReviveStateTx.
+The wallet is the user entrance. Due to the introduction of new transaction types, `ReviveStateTx`, and new RPC APIs, such as `eth\_estimateGasAndReviveState`, the existing wallet needs to support the generation of Witness in the expired state and send `ReviveStateTx`.
 
 ## SDK
 

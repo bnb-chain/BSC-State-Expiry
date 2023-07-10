@@ -18,7 +18,7 @@ type SnapValue struct {
 }
 ```
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/1c4d3a50-7baa-4b43-8913-a48d79c2e094/jacksen_state_expiry-ss-snapshot-epoch.png)
+![](assets/jacksen_state_expiry-ss-snapshot-epoch.png)
 
   
 

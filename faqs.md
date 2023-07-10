@@ -30,7 +30,7 @@ A shadow tree is a shadow mapping to the MPT and can be accessed directly by the
 
 When a high-level layer is revived, the actual witness depth may decrease If it is 2 or even 1, only leaf node witnesses are included, and the witness size is the smallest.
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/4852292d-77e3-424c-b050-a35e6b8181e3/image.png)
+![](assets/partial-revive.png)
 
 When `Witness[0]`, `Witness[1]`, `Witness[5]` revive `state C` on chain, you only provide `Witness[6]` to revive `state D` .
 
@@ -75,7 +75,7 @@ You can just call `eth_estimateGasAndReviveState` , it will return `ReviveStateT
 
 Here is a diagram:
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/37594308-212a-4933-aa9d-f14a966e21ea/image.png)
+![](assets/jacksen_state_expiry-ss-demo.png)
 
 ## When is the contract slot expired?
 
@@ -111,7 +111,7 @@ However, based on the current BSC scheme, it maximizes compatibility with the ec
 
 The advantage of using two hard forks is that the time to enter Epoch1 and Epoch2 can be controlled separately, and when enter Epoch2, there will appear expired state, during which we can continue to optimize and fix discovered bugs.
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/51d93844-a9f9-4daf-904b-1959d8525461/image.png)
+![](assets/ss-hardfork.png)
 
 Of course, this design can freely control the time to enter Epoch1 or Epoch2. When everything is ready, directly enable hard fork2 to enter Epoch2 without waiting too long.
 
@@ -128,97 +128,3 @@ For transaction that only involves balance transfer, it can be done as usual. be
   
 
 If there iis any expired state, New Transaction Type, ReviveStateTx could revive state from witness, and execution tx as usual.
-
-# All Diagrams
-
-Diagram 1![](https://t25652588.p.clickup-attachments.com/t25652588/15f230d1-519a-4c95-a207-066aaa9447fe/image.png)
-
-  
-
-Diagram 2
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/10b31802-cbeb-4a5f-94a7-fb16f2e9f6b0/image.png)
-
-Diagram 3
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/6691b9bd-5900-44d1-8df6-0b81158d15b4/image.png)
-
-Diagram 4
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/f1888d04-989f-47e9-98d4-a044cb897894/image.png)
-
-Diagram 5
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/c5d8664b-073d-49ad-80c6-dfbd9b19a738/image.png)
-
-Diagram 6
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/07f61c24-5b91-4e94-b2ff-dc02967fd081/image.png)
-
-Diagram 7
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/a29e8419-727d-4141-8a27-dca3ce9cc4a3/image.png)
-
-Diagram 8
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/457b5a6e-fb47-44c0-af16-5a8641669cdf/image.png)
-
-Diagram 9
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/dde48460-2502-495c-92e1-d8810c86da69/image.png)
-
-Diagram 10
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/dee9297d-5db9-4cf6-8f7b-ecb17fb5d15f/image.png)
-
-Diagram 11
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/bec72141-54ab-4b09-bb9e-c17fdd11aef3/image.png)
-
-Diagram 12
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/05d63d7a-10bf-49b3-838c-3d0d6c8648b7/image.png)
-
-Diagram 13
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/f0e578ad-85ff-4f77-ab8f-5840070ba518/image.png)
-
-Diagram 14
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/4d5488a5-0d60-4426-a23f-a2fb07d5dc53/image.png)
-
-Diagram 15
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/cfa509f0-9826-40ee-8ab5-5c9a7dc2eed2/image.png)
-
-Diagram 16
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/75946071-c327-4a53-924e-abcd61287fc0/image.png)
-
-Diagram 17
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/9ae45438-d1bb-4f36-9795-40dab0c9d3e7/image.png)
-
-Diagram 18
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/2386e635-4ed3-4b9b-ac55-51872273bb7d/image.png)
-
-Diagram 19
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/59eda832-9d68-4926-9949-6c0b0ded1bb2/image.png)
-
-Diagram 20
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/35796f3b-9f70-4dd1-87f4-d70a250c3629/image.png)
-
-Diagram 21
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/ca433e58-ea0c-45dc-abd3-d5e1cc21827e/image.png)
-
-Diagram 22
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/83ecf5ac-db4c-4757-be3e-9ffe2c78e8e0/image.png)
-
-Diagram 23
-
-![](https://t25652588.p.clickup-attachments.com/t25652588/e56a56f9-19b5-42a0-a668-23bbb40c19ff/image.png)

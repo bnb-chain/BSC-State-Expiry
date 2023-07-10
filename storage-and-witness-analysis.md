@@ -22,7 +22,7 @@ Summarize some state expiry storage statistics data.
 
 ## Setup Env
 
-Private ([https://app.clickup.com/25652588/docs/revbc-25105/revbc-123385](https://app.clickup.com/25652588/docs/revbc-25105/revbc-123385))
+<!--Private ([https://app.clickup.com/25652588/docs/revbc-25105/revbc-123385](https://app.clickup.com/25652588/docs/revbc-25105/revbc-123385))-->
 
 ### Deploy BEP20
 
@@ -213,9 +213,9 @@ It can be found that although the deepest state is in layer7, when revive 3000 s
 
 Gas and witness size are basically positively correlated, and hash calculations are also used to calculate gas costs.
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/8e17ee30-ea08-4a76-9482-59c144739f68/image.png)
+![](assets/gas-and-witness-size.png)
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/b54d8d20-fc63-4a97-88cd-40c4e678072a/image.png)
+![](assets/gas-and-witness-size-2.png)
 
 In the future, if the BSC subsequently has lower storage costs and more computing resources, the gas can be further discounted, but the witnessSize is determined.
 
@@ -225,7 +225,7 @@ The public ancestor that has been restored does not need to be restored again, i
 
 ## Storage/Witness Simple Analysis
 
-Here is a mainnet contract trie inspect from Private ([https://app.clickup.com/25652588/docs/revbc-21165/revbc-77785](https://app.clickup.com/25652588/docs/revbc-21165/revbc-77785)):
+Here is a mainnet contract trie inspect <!--from Private ([https://app.clickup.com/25652588/docs/revbc-21165/revbc-77785](https://app.clickup.com/25652588/docs/revbc-21165/revbc-77785)):-->
 
 ```plain
 Contract Trie, total trie num: 4331965, ShortNodeCnt: 2429676125, FullNodeCnt: 844088530, ValueNodeCnt: 2403833060
@@ -283,7 +283,7 @@ Evaluate the storage size, assuming that there is no `insert` or `delete` in the
 
 Suppose KV is accessed 1%, FullNode is accessed 16%.
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/c8930082-4a9a-4cf4-aba2-aa37ea3aea06/image.png)
+![](assets/storage-and-witness-analysis.png)
 
 ## Summary
 
@@ -295,7 +295,7 @@ The high-level trie layers has more dense FullNodes, it cause the larger the wit
 
   
 
-Further optimization ideas:
+## Further optimization ideas:
 
 1\. For Gas, further adjust the cost of witness revive Gas according to the calculation and storage costs of BSC;
 

@@ -12,7 +12,7 @@ No modifications are needed for offline pruning. Since expired nodes will not be
 
 A new condition is added to check if the node is expired, it will be dereferenced. However, the condition is adjusted based on BEP-206:
 
-> These expired trie nodes can be pruned, but in order to keep the proof generation capability, it is better to only prune the shadow node that is >=2 epochs behind its parent.
+> These expired trie nodes can be pruned, but in order to keep the proof generation capability, it is better to only prune the shadow node that is `>=2` epochs behind its parent.
 
   
 
