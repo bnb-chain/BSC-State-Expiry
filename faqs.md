@@ -123,8 +123,8 @@ Yes, legacy Transaction still works, but users must always check if the legacy t
 
   
 
-For transaction that only involves balance transfer, it can be done as usual. because of the account data is always available.
+For a transaction that only involves balance transfer, it can be done as usual because the account data is always available.
 
   
 
-If there iis any expired state, New Transaction Type, ReviveStateTx could revive state from witness, and execution tx as usual.
+If there is any expired state, New Transaction Type, ReviveStateTx could revive state from witness, and execution tx as usual.
