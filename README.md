@@ -31,18 +31,31 @@ Proposal: [https://github.com/bnb-chain/BEPs/pull/206](https://github.com/bnb-ch
 
 BEP-206 proposes a hybrid mode state expiry with the addition of Shadow Tree and epoch in the storage tree. The expiry mechanism only works on storage state data (i.e. it will not affect EOA). The Shadow Tree is used to store the access record for the MPT tree, such that all untouched states in the last 2 epochs will expire. <!--More technical details can be found in Private ([https://app.clickup.com/25652588/docs/revbc-25105/revbc-121925](https://app.clickup.com/25652588/docs/revbc-25105/revbc-121925))-->
 
-  
-### BEP-215
 
-Proposal: [https://github.com/bnb-chain/BEPs/pull/215](https://github.com/bnb-chain/BEPs/pull/215)
-
-BEP-215 proposes a new transaction type to support BEP-206. The new transaction type allows the ability to revive a storage state and execute as usual in the same transaction. <!--More technical details can be found in Private ([https://app.clickup.com/25652588/docs/revbc-25105/revbc-123605](https://app.clickup.com/25652588/docs/revbc-25105/revbc-123605))-->  
-
-### ChangeLog
-
-* **2023-01-18:** First iteration of the state expiry proposal
-* **2023-02-23:** Second iteration of the state expiry proposal
-* **2023-03-21:** Third iteration of the state expiry proposal
-* **2023-03-22:** Development of state expiry POC begins
-* **2023-05-15:** Development of POC is concluded and shared within the internal teams
-* **2023-06-13:** Researching on Verkle Tree and how it can be integrated into BEP-206
+## Table of Content
+<!--ts-->
+- [Introduction](introduction.md)
+- Public DevNet
+- [Run State Expiry DevNet](run-devnet.md)
+- [Comparison with Other Solutions](solution-comparison.md)
+  + [Ethereum](comparison-eth.md) 
+  + [Solana](comparison-sol.md) 
+  + [Polygon Miden](comparison-polygon.md) 
+- Core Concepts
+  + [Hard Fork and State Epoch](hard-fork-and-state-epoch.md) 
+  + [MPT and Shadow Tree](mpt-and-shadow-tree.md) 
+  + [Snapshot](snapshot.md) 
+  + [EVM and StateDB](evm-and-statedb.md) 
+  + ReviveStateTx
+  + [Witness and Revive](witness-and-revive.md) 
+  + [Verkle Tree](verkle-tree.md) 
+  + [Prune](prune.md) 
+  + [Partial Revive](partial-revive.md) 
+  + [Estimate Witness](estimate-witness.md) 
+- [Impact on Ecosystem](impact-on-ecosystem.md) 
+- [Data Availability Layer](data-availability-layer.md) 
+- [POC Progress](poc-progress.md)
+  + [Storage and Witness Analysis](storage-and-witness-analysis.md)  
+  + [Changelog](changelog.md) 
+- [FAQs](faqs.md) 
+<!--te-->
