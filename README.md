@@ -10,15 +10,12 @@ The design documents refer to [BEP-206](https://github.com/bnb-chain/BEPs/pull/2
 - Public DevNet
 - [Run State Expiry DevNet](run-devnet.md)
 - [Comparison with Other Solutions](solution-comparison.md)
-  + [Ethereum](comparison-eth.md) 
-  + [Solana](comparison-sol.md) 
-  + [Polygon Miden](comparison-polygon.md) 
 - Core Concepts
   + [Hard Fork and State Epoch](hard-fork-and-state-epoch.md) 
   + [MPT and Shadow Tree](mpt-and-shadow-tree.md) 
   + [Snapshot](snapshot.md) 
   + [EVM and StateDB](evm-and-statedb.md) 
-  + ReviveStateTx
+  + [ReviveStateTx](revive-state-tx.md)
   + [Witness and Revive](witness-and-revive.md) 
   + [Verkle Tree](verkle-tree.md) 
   + [Prune](prune.md) 

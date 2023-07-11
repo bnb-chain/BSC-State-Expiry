@@ -103,7 +103,6 @@ In the state expiry version, the archive node will add additional state:
     *   For the shadow branch node, there are at most 16 copies in each epoch, corresponding to the branch node of the MPT.
 *   Storage kv of snapshot, add epoch meta, just for pruning.
 
-  
 
 Some storage size comparison:
 
@@ -135,11 +134,10 @@ Contract Trie, total trie num: 8, ShortNodeCnt: 3104, FullNodeCnt: 994, ValueNod
 
 It can be found that most of the values are stored at depth 3 and depth 4, so it is estimated that the depth of witnesses based on MPT is mostly at 3 or 4.
 
-  
 
 But partial revive is not considered at this time. When a high-level layer is revived, the actual witness depth may decrease If it is 2 or even 1, only leaf node witnesses are included, and the witness size is the smallest.
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/4852292d-77e3-424c-b050-a35e6b8181e3/image.png)
+![](assets/inpect-storage-trie.png)
 
 When `Witness[0]`, `Witness[1]`, `Witness[5]` revive `state C` on chain, you only provide `Witness[6]` to revive `state D` .
 
@@ -166,7 +164,6 @@ bash scripts/clusterup_set_first.sh stop
 
 It can be found that after prune, most of the history of the shadowNode is pruned, and the expired trie and snapshot storage KV are deleted together.
 
-  
 
 When not all slots expire, trie node, snap storage KV, and shadow node plainState will also remain the unexpired state data.
 
@@ -209,7 +206,6 @@ It can be found that although the deepest state is in layer7, when revive 3000 s
 *   Min Witness, depth 1, size 42 Bytes, gas 1300;
 *   Avg Witness, depth: 2, size 319 Bytes, gas 6012;
 
-  
 
 Gas and witness size are basically positively correlated, and hash calculations are also used to calculate gas costs.
 
@@ -218,7 +214,6 @@ Gas and witness size are basically positively correlated, and hash calculations 
 ![](assets/gas-and-witness-size-2.png)
 
 In the future, if the BSC subsequently has lower storage costs and more computing resources, the gas can be further discounted, but the witnessSize is determined.
-
   
 
 The public ancestor that has been restored does not need to be restored again, it only needs to revive the remaining expired MPT path.
@@ -247,19 +242,13 @@ Contract Trie, total trie num: 4331965, ShortNodeCnt: 2429676125, FullNodeCnt: 8
 |                -                 |  12   |      0       |      0      |     128      |
 | ContractTrie-6034181797560580565 | Total |   96677166   |  31298024   |   95844363   |
 +----------------------------------+-------+--------------+-------------+--------------+
-```
-
-  
+```  
 
 There are about 95 M slots, 31M full nodes, the maximum depth is 12, and the first 6 layers do not save any slots.
-
-  
 
 Assuming that each epoch, 1% of slots will be accessed, 99% of slots will not be used, and 16% of branch nodes will be accessed.
 
 And assume that the average full node size is 319Bytes, the average short node size is 45Bytes, the shadow node size is 64Bytes, and the snapshot Storage KV 98Bytes+3Bytes;
-
-  
 
 [CryptoMines Worker (CMW)](https://bscscan.com/token/0x6053b8fc837dc98c54f7692606d632ac5e760488) was created on Sep-12-2021 as an NFT contract. There have been 153 txs in the last 30 days, avg 5.1/day. In the past year/365 days, there have been 1050 txs, avg 2.8/day. The most optimistic estimates are that far less than 0.1% of slots are accessed.
 
@@ -269,15 +258,13 @@ Contract Creation：[https://bscscan.com/tx/0xc1a14bbe34600ac51e5d8dfe029f6015b4
 
 CMW doc: [https://docs.cryptomines.app/gameplay-1/workers](https://docs.cryptomines.app/gameplay-1/workers)
 
-  
 
 Here is the tx statistic chart of this contract:
 
-![](https://t25652588.p.clickup-attachments.com/t25652588/dad94351-d72e-4f4a-bce0-d3e509a47e04/image.png)
+![](assets/storge-simple-analysis.png)
 
 [https://bscscan.com/address/0x6053b8fc837dc98c54f7692606d632ac5e760488#analytics](https://bscscan.com/address/0x6053b8fc837dc98c54f7692606d632ac5e760488#analytics)
 
-  
 
 Evaluate the storage size, assuming that there is no `insert` or `delete` in the contract storage, only `query` and `update` .
 
@@ -289,11 +276,9 @@ Suppose KV is accessed 1%, FullNode is accessed 16%.
 
 Above shows that the witness size is most affected by the Trie FullNode, because the FullNode size is large in many dense FullNodes.
 
-  
 
 The high-level trie layers has more dense FullNodes, it cause the larger the witness size, and the sparser the full nodes in the lower trie layers, it has the smaller the witness size.
 
-  
 
 ## Further optimization ideas:
 
