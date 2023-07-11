@@ -4,128 +4,141 @@ The current State Expiry solution based on BEP206 and BEP215 has been implemente
 
 ## Repo
 
-bsc: [https://github.com/node-real/bsc/tree/state\_expiry\_develop](https://github.com/node-real/bsc/tree/state_expiry_develop)
+BSC: [https://github.com/node-real/bsc/tree/state\_expiry\_develop](https://github.com/node-real/bsc/tree/state_expiry_develop)
 
-bsc-deploy: [https://github.com/bnb-chain/bsc-deploy/tree/state-expiry-dev](https://github.com/bnb-chain/bsc-deploy/tree/state-expiry-dev)
+Deploy Tool: [https://github.com/node-real/state-expiry-poc/](https://github.com/node-real/state-expiry-poc/)
 
-New Repo: [https://github.com/node-real/state-expiry-poc/](https://github.com/node-real/state-expiry-poc/)
+## Environment Setup
 
-## Usage
+1. Clone repo and submodules.
 
-```plain
-# download bsc-deploy
-git clone https://github.com/bnb-chain/bsc-deploy --branch state-expiry-dev bsc-deploy-state-expiry
-cd bsc-deploy-state-expiry
-git submodule update --init --recursive
-
-# download bsc
-git clone https://github.com/node-real/bsc --branch state_expiry_develop bsc-state-expiry
-# compile & copy to bsc-deploy-state-expiry/bin
-cd bsc-state-expiry
-make geth
-go build -o bootnode ./cmd/bootnode
-cp build/bin/geth ../bsc-deploy-state-expiry/bin
-cp bootnode ../bsc-deploy-state-expiry/bin
+```bash
+git clone --recursive https://github.com/node-real/state-expiry-poc.git
 ```
 
-### Deploying 3 archive nodes
+2. Prepare state expiry binary, and clone BSC repo with `state_expiry_develop` branch. 
 
-```plain
-cd bsc-deploy-state-expiry
-# Deploying 3 archive nodes
-# modifies the genesis such that the first account of scripts/asset/test_account.json is the initBnbHolder
+```bash
+git clone https://github.com/node-real/bsc --branch state_expiry_develop bsc-state-expiry 
+```
+
+3. Compile `geth` and `bootnode`, then copy to `bin` folder.
+
+```bash
+cd bsc-state-expiry
+make geth && go build -o bootnode ./cmd/bootnode
+mkdir -p ../state-expiry-poc/bin && cp build/bin/geth bootnode ../state-expiry-poc/bin
+```
+
+## Try DevNet
+
+Now, we need enter `state-expiry-poc` to run testing.
+
+```bash
+cd state-expiry-poc
+```
+
+### Run state expiry client
+
+All setup scripts are available in `state-expiry-poc/scripts`. By default, it will create 3 nodes config, and start them.
+
+#### Deploy 3 archive nodes
+
+```bash
+# Deploying 3 archive nodes# modifies the genesis such that the first account of scripts/asset/test_account.json is the initBnbHolder
 bash scripts/clusterup_set_first.sh start
 ```
 
-### Deploying 2 full node + 1 archive node as default
+#### Deploy 2 full node + 1 archive node
 
-```plain
-# Deploying 2 full node + 1 archive node as default
+```bash
 bash scripts/clusterup_pruning_test.sh start
 ```
 
-### Stop cluster nodes
+#### Stop cluster nodes
 
-```plain
-# Stop cluster nodes
+```bash
 bash scripts/clusterup_set_first.sh stop
 ```
 
-### Restart cluster nodes
+### Deploy BEP20 & Testing
 
-```plain
-# restart cluster nodes, do not delete previous data, restart 3 nodes as default
-bash scripts/clusterup_set_first.sh restart
+Then enter `state-expiry-poc/test-contract/deploy-BEP20` to run all BEP20 scripts.
+
+It mocks a fake BEP20 token to test contract slots expiry scenarios.
+
+```bash
+cd test-contract/deploy-BEP20
 ```
 
-### Testing BNB transfer
+#### Deploy BEP20 Token Contract
 
-```plain
-cd bsc-deploy-state-expiry
-cd test-script
-# The script keeps sending transactions until ctrl-c
-go run test_bnb_transfer.go
-```
-
-### Deploying BEP20 Token Contract
-
-```plain
-cd bsc-deploy-state-expiry
-cd test-contract/deploy-BEP20/
-# install deps
+```bash
+# install dependencies
 npm install
 # deploy BEP20 Token
 npx hardhat run scripts/deploy.js
 ```
 
-### Transfer BEP20 Token & Read Balance
+#### Transfer BEP20 Token & Read Balance
 
-```plain
-cd test-contract/deploy-BEP20/
-# This will transfer BEP20 Token from scripts/asset/test_account.json first account
-# This script only transfer once
+```bash
+# This will transfer BEP20 Token from scripts/asset/test_account.json first account# This script only transfer once
 npx hardhat run scripts/transfer.js
 # read sender & receiver's balance
 npx hardhat run scripts/read-balance.js
 ```
 
-you should wait BEP20 transfer state expired, the default epoch period in testing env is 50 blocks. If you transfer token at Epoch0, you should wait until Epoch2.
+Now, you could use the default users to `transfer` tokens, but when you stop using on-chain interactions after a period of time, only `readBalance` will work because it doesn't trigger on-chain state access.
 
-  
+Using the default config, after about 20 minutes, you cannot directly use the script to `transfer` tokens, as you may get `Access expired state` error.
 
-when expired and run `npx hardhat run scripts/read-balance.js`, you may got `ProviderError: Access expired state` .
+In this case, you need to revive state. For details, see `Send Revive Transaction`.
 
-### Revive contract states
+### Other testcases
 
-when state is expired, you should run this script to revive the states used in above transfer.
+Then enter `state-expiry-poc/test-script` to run all golang scripts.
 
-```plain
+```bash
 cd test-script
-# The script will revive sender & receiver state, and exe a new transfer token
+```
+
+#### BNB Transfer Loop
+
+```bash
+# The script keeps sending transactions until ctrl-c
+go run test_bnb_transfer.go
+```
+
+#### Send Revive Transaction
+When your BEP20 token contract got `Access expired state` error, you should call below script to revive your tx's accessed states.
+
+It will call `eth_estimateGasAndReviveState` API first and got revive `Witness`, then it will send a `ReviveStateTx` with `Witness` to revive all your expired states, and execute the tx as normal.
+
+```bash
+# The script will revive sender & receiver state, and exe a new token transfer
 go run test_bep20_witness_revive.go
 ```
 
-### Useful RPC Query
+## Useful RPC Commands
 
-```plain
-# query best height
+```bash
+# query block height
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":83}' 127.0.0.1:8502
 
-# query block
+# query block by number
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["0x3", true],"id":83}' 127.0.0.1:8502
 
-# query tx
+# query tx by hash
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0x12beecfb1adb7d874c4714a7871e23cf70baef612235d1276568611460927f18"],"id":83}' 127.0.0.1:8502
 
 # query tx receipt
 curl -H "Content-Type: application/json" -X POST --data '{"jsonrpc":"2.0","method":"eth_getTransactionReceipt","params":["0x782192568c8ee3393e3f3e9b7ac46e231d3cbe0b96941b642e28220ba343209b"],"id":83}' 127.0.0.1:8502
 ```
 
-  
-
 ## Config
 
-The default genesis config is below, default EpochPeriod is 200, the state will expired in next next epoch, so it will expired in max 20 minutes.
+The default genesis config is shown below:
 
 ```json
 {
@@ -143,7 +156,7 @@ The default genesis config is below, default EpochPeriod is 200, the state will 
     "muirGlacierBlock": 0,
     "ramanujanBlock": 0,
     "nielsBlock": 0,
-    "mirrorSyncBlock":1,
+    "mirrorSyncBlock": 1,
     "brunoBlock": 1,
     "eulerBlock": 2,
     "gibbsBlock": 3,
@@ -151,8 +164,8 @@ The default genesis config is below, default EpochPeriod is 200, the state will 
     "planckBlock": 5,
     "lubanBlock": 6,
     "platoBlock": 7,
-    "claudeBlock": 10,
-    "elwoodBlock": 20,
+    "claudeBlock": 200,
+    "elwoodBlock": 400,
     "parlia": {
       "period": 3,
       "epoch": 200,
@@ -162,4 +175,4 @@ The default genesis config is below, default EpochPeriod is 200, the state will 
 }
 ```
 
-`claudeBlock` is the state expiry first hard fork, `elwoodBlock` is the second hard fork, parlia.epoch is the EpochPeriod.
+The default `EpochPeriod` is 200, the state will expired in the next 2 epoch, so it will expired in max 20 minutes. `claudeBlock` is the first hard fork for state expiry, `elwoodBlock` is the second hard fork and `parlia.epoch` is the EpochPeriod.
