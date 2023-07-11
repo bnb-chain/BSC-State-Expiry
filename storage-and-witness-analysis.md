@@ -54,7 +54,7 @@ cd inspect-bsc
 go build -o geth-inspect ./cmd/geth
 sudo mv geth-inspect /usr/local/bin/
 
-cd ~/bsc-deploy/
+cd ~/state-expiry-poc/
 # must stop nodes before inspect
 bash scripts/clusterup_set_first.sh stop
 # inspect storage, 3000 addr in BEP20, 3859 blocks

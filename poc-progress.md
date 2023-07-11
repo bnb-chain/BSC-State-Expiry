@@ -19,7 +19,7 @@ Here is a very simplified interaction diagram about state expiration, but the ac
 
   
 
-Here is the DevNet is built to simulate state expiry transactions and some scenarios. It is built using the [bsc-deploy](https://github.com/bnb-chain/bsc-deploy) repository.
+Here is the DevNet is built to simulate state expiry transactions and some scenarios. It is built using the [state-expiry-poc](https://github.com/node-real/state-expiry-poc/) repository.
 
 ## Summary
 
