@@ -5,7 +5,7 @@
 There are several reasons to keep it:
 
 *   The size of the L1 account trie is relatively small, constituting only around 4% of the L2 storage trie on BSC as of the end of 2022.
-*   The L1 account trie contains crucial information about user accounts, such as their balance and nonce. If users were required to revive their accounts before accessing their assets, it would significantly impact their experience.
+*   The L1 account trie contains crucial information about user accounts, such as their balance and nonce. If users were required to revive their accounts before accessing their ../assets, it would significantly impact their experience.
 *   By retaining the L1 account trie, the witness verification process can be much simpler.
 
 ## Why Not Create A New L2 Storage Trie?
@@ -30,7 +30,7 @@ A shadow tree is a shadow mapping to the MPT and can be accessed directly by the
 
 When a high-level layer is revived, the actual witness depth may decrease If it is 2 or even 1, only leaf node witnesses are included, and the witness size is the smallest.
 
-![](assets/partial-revive.png)
+![](../assets/consensus-state-expiry/partial-revive.png)
 
 When `Witness[0]`, `Witness[1]`, `Witness[5]` revive `state C` on chain, you only provide `Witness[6]` to revive `state D` .
 
@@ -75,7 +75,7 @@ You can just call `eth_estimateGasAndReviveState` , it will return `ReviveStateT
 
 Here is a diagram:
 
-![](assets/jacksen_state_expiry-ss-demo.png)
+![](../assets/consensus-state-expiry/jacksen_state_expiry-ss-demo.png)
 
 ## When is the contract slot expired?
 
@@ -111,7 +111,7 @@ However, based on the current BSC scheme, it maximizes compatibility with the ec
 
 The advantage of using two hard forks is that the time to enter Epoch1 and Epoch2 can be controlled separately, and when enter Epoch2, there will appear expired state, during which we can continue to optimize and fix discovered bugs.
 
-![](assets/ss-hardfork.png)
+![](../assets/consensus-state-expiry/ss-hardfork.png)
 
 Of course, this design can freely control the time to enter Epoch1 or Epoch2. When everything is ready, directly enable hard fork2 to enter Epoch2 without waiting too long.
 

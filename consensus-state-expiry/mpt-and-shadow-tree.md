@@ -6,7 +6,7 @@ During Epoch 0, the storage trie stays unchanged. At the start of Epoch 1, the s
 
   
 
-![](assets/storage-layout.png)
+![](../assets/consensus-state-expiry/storage-layout.png)
 
   
 
@@ -22,7 +22,7 @@ When Shadow Tree is introduced, the storage trie has a new trie node type as its
 
 The following flow chart shows how a value can be accessed in a storage trie:
 
-![](assets/storage-trie.png)
+![](../assets/consensus-state-expiry/storage-trie.png)
 
 Nodes are traversed until we reach a value node, which indicates that the value for a storage slot key is found. During the traverse process, we will check the expiry status of a child node when reached a full node. A node is considered expired if the current epoch is greater than or equal to 2, and the difference between the node epoch and the current epoch is at least 2.
 
@@ -38,7 +38,7 @@ If we come across an expired node when reading or writing a storage slot, an `Ex
 
 The hash of a ShadowBranchNode is calculated by taking all of the corresponding BranchNode's child nodes' shadow hash values and hashing them together.
 
-![](assets/shadowBranchNode.png)
+![](../assets/consensus-state-expiry/shadowBranchNode.png)
 
   
 
@@ -46,7 +46,7 @@ The hash of a ShadowBranchNode is calculated by taking all of the corresponding 
 
 If an ExtensionNode's child node is a BranchNode, then its corresponding ShadowExtensionNode's hash value is calculated by hashing the hash of ShadowBranchNode's hash value and ShadowBranchNode's epoch map.
 
-![](assets/shadowExtensionNode.png)
+![](../assets/consensus-state-expiry/shadowExtensionNode.png)
 
   
 
@@ -58,13 +58,13 @@ If an ExtensionNode's child node is a LeafNode, then its corresponding ShadowExt
 
 The hash value of a RootNode is calculated by hashing the MPTRootHash, ShadowRootHash, and Epoch. The hash value will then be stored as the account's storage root hash.
 
-![](assets/rootHash.png)
+![](../assets/consensus-state-expiry/rootHash.png)
 
 ## ShadowTree Database
 
 ShadowTree must use a `Path-based scheme`, and cannot use a `Hash-based scheme`.
 
-![](assets/jacksen_state_expiry-ss-shadownode-demo.png)
+![](../assets/consensus-state-expiry/jacksen_state_expiry-ss-shadownode-demo.png)
 
 The storage of the shadow node borrows from the archive model of snapshot and erigon.
 

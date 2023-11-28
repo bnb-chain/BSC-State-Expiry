@@ -10,7 +10,7 @@ Verkle Tries are similar to Merkle Trees, which are currently employed as data s
 
 Let's look at Merkle Tree:
 
-![](assets/merkle-tree.png)
+![](../assets/consensus-state-expiry/merkle-tree.png)
 
 In this example, we are trying to construct a Merkle proof for the value "16". To do this, we need to construct a proof which contains all red-marked nodes in the figure. As the Merkle Tree goes wider and deeper, the proof size will also increase.
 
@@ -18,7 +18,7 @@ In this example, we are trying to construct a Merkle proof for the value "16". T
 
 Let's look at Verkle Tree:
 
-![](assets/verkle-tree.png)
+![](../assets/consensus-state-expiry/verkle-tree.png)
 
 In Verkle Tree, each node holds a proof called vector commitment. The proof is able to show that a particular node exists in its parent node. For example, "_π19_" is the proof that "kv" exists in "c1". With this, constructing a Verkle proof is as simple as aggregating the path from the root node to the value node. The primary difference between Verkle proof and Merkle proof is that Verkle proof does not require the sister nodes at each level, reducing the overall witness size.
 

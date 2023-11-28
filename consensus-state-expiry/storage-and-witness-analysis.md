@@ -137,7 +137,7 @@ It can be found that most of the values are stored at depth 3 and depth 4, so it
 
 But partial revive is not considered at this time. When a high-level layer is revived, the actual witness depth may decrease If it is 2 or even 1, only leaf node witnesses are included, and the witness size is the smallest.
 
-![](assets/inpect-storage-trie.png)
+![](../assets/consensus-state-expiry/inpect-storage-trie.png)
 
 When `Witness[0]`, `Witness[1]`, `Witness[5]` revive `state C` on chain, you only provide `Witness[6]` to revive `state D` .
 
@@ -209,9 +209,9 @@ It can be found that although the deepest state is in layer7, when revive 3000 s
 
 Gas and witness size are basically positively correlated, and hash calculations are also used to calculate gas costs.
 
-![](assets/gas-and-witness-size.png)
+![](../assets/consensus-state-expiry/gas-and-witness-size.png)
 
-![](assets/gas-and-witness-size-2.png)
+![](../assets/consensus-state-expiry/gas-and-witness-size-2.png)
 
 In the future, if the BSC subsequently has lower storage costs and more computing resources, the gas can be further discounted, but the witnessSize is determined.
   
@@ -261,7 +261,7 @@ CMW doc: [https://docs.cryptomines.app/gameplay-1/workers](https://docs.cryptomi
 
 Here is the tx statistic chart of this contract:
 
-![](assets/storge-simple-analysis.png)
+![](../assets/consensus-state-expiry/storge-simple-analysis.png)
 
 [https://bscscan.com/address/0x6053b8fc837dc98c54f7692606d632ac5e760488#analytics](https://bscscan.com/address/0x6053b8fc837dc98c54f7692606d632ac5e760488#analytics)
 
@@ -270,7 +270,7 @@ Evaluate the storage size, assuming that there is no `insert` or `delete` in the
 
 Suppose KV is accessed 1%, FullNode is accessed 16%.
 
-![](assets/storage-and-witness-analysis.png)
+![](../assets/consensus-state-expiry/storage-and-witness-analysis.png)
 
 ## Summary
 
