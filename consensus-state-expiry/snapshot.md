@@ -18,7 +18,7 @@ type SnapValue struct {
 }
 ```
 
-![](assets/jacksen_state_expiry-ss-snapshot-epoch.png)
+![](../assets/consensus-state-expiry/jacksen_state_expiry-ss-snapshot-epoch.png)
 
   
 

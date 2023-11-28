@@ -10,8 +10,8 @@ This is how to provide users with a better user experience is the key. BSC has a
 
 The positioning of Estimate Witness is like the previous EstimateGas, which allows users to estimate the witness and gas required before initiating a transaction. This involves the generation of witnesses and the calculation of the minimum Gas.
 
-![](assets/witness-and-min-gas-calculation.png)
+![](../assets/consensus-state-expiry/witness-and-min-gas-calculation.png)
 
 Estimate Witness will be provided in RPC API, which greatly improves user experience.
 
-![](assets/rpc.png)
+![](../assets/consensus-state-expiry/rpc.png)

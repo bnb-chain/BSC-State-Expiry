@@ -4,7 +4,7 @@ The witness used to revive storage undergoes a series of transformations, starti
 
   
 
-![](assets/witness-and-revive.png)
+![](../assets/consensus-state-expiry/witness-and-revive.png)
 
 1. When users send a revive transaction, it contains a **WitnessList** which is a list of **ReviveWitness**.
 2. Each witness is decoded into **StorageTrieWitness** which contains a list of **MPTProof**.

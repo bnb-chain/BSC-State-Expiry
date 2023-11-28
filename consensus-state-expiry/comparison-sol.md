@@ -108,7 +108,7 @@ A percentage of the rent collected is destroyed. The rest is distributed to vali
 
 **Using the Solana rent command from the** [**Solana CLI**](https://docs.alchemy.com/docs/how-to-setup-your-solana-development-environment) **provides a simple approach to estimate rent costs.** You can view the rent per byte, per epoch, and the minimum amount required for an account to be rent-exempt by entering the size (in bytes) of your account.
 
-![](assets/solana-rent-calculation.png)
+![](../assets/consensus-state-expiry/solana-rent-calculation.png)
 
   
 

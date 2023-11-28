@@ -4,14 +4,14 @@ The current State Expiry solution based on BEP206 and BEP215 has been implemente
 
 ### Related Modules & Consideration
 
-![](assets/related-modules.png)
+![](../assets/consensus-state-expiry/related-modules.png)
 
 ### POC Demo Show
 
 Here is a very simplified interaction diagram about state expiration, but the actual scenarios will be much more complicated.
   
 
-![](assets/jacksen_state_expiry-ss-demo.png)
+![](../assets/consensus-state-expiry/jacksen_state_expiry-ss-demo.png)
 
 1. Archive Nodes/DA Layer, keep all epoch history;
 2. Full Nodes/RPC Provider, only keep latest epoch states;
