@@ -47,53 +47,7 @@ go run test_random_transfer.go > t.log
 ### Inspect storage
 
 ```plain
-# if you have not install geth-inspect tool, follow below
-cd ~/
-git clone https://github.com/Fynes/bsc --branch add_inspect_trie inspect-bsc
-cd inspect-bsc
-go build -o geth-inspect ./cmd/geth
-sudo mv geth-inspect /usr/local/bin/
-
-cd ~/state-expiry-poc/
-# must stop nodes before inspect
-bash scripts/clusterup_set_first.sh stop
-# inspect storage, 3000 addr in BEP20, 3859 blocks
-./bin/geth db inspect --datadir=./clusterNode/node1/geth/
-
-# output 
-+-----------------+--------------------+------------+-------+
-|    DATABASE     |      CATEGORY      |    SIZE    | ITEMS |
-+-----------------+--------------------+------------+-------+
-| Key-Value store | Headers            | 173.63 KiB |   276 |
-| Key-Value store | Bodies             | 538.39 KiB |   276 |
-| Key-Value store | Receipt lists      | 501.77 KiB |   276 |
-| Key-Value store | Difficulties       | 11.94 KiB  |   276 |
-| Key-Value store | Block number->hash | 11.32 KiB  |   276 |
-| Key-Value store | Block hash->number | 11.05 KiB  |   276 |
-| Key-Value store | Transaction index  | 100.80 KiB |  3036 |
-| Key-Value store | Bloombit index     | 0.00 B     |     0 |
-| Key-Value store | Contract codes     | 164.15 KiB |    12 |
-| Key-Value store | Trie nodes         | 957.01 KiB |  6994 |
-| Key-Value store | Trie preimages     | 1.11 KiB   |    18 |
-| Key-Value store | Account snapshot   | 967.00 B   |    15 |
-| Key-Value store | Storage snapshot   | 536.90 KiB |  3372 |
-| Key-Value store | Clique snapshots   | 0.00 B     |     0 |
-| Key-Value store | Parlia snapshots   | 323.00 B   |     1 |
-| Key-Value store | Singleton metadata | 218.57 KiB |    10 |
-| Ancient store   | Headers            | 6.00 B     |     0 |
-| Ancient store   | Bodies             | 6.00 B     |     0 |
-| Ancient store   | Receipt lists      | 6.00 B     |     0 |
-| Ancient store   | Difficulties       | 6.00 B     |     0 |
-| Ancient store   | Block number->hash | 6.00 B     |     0 |
-| Light client    | CHT trie nodes     | 0.00 B     |     0 |
-| Light client    | Bloom trie nodes   | 0.00 B     |     0 |
-| Shadow Node     | Metadata           | 61.00 B    |     1 |
-| Shadow Node     | History            | 734.70 KiB |  3372 |
-| Shadow Node     | ChangeSet          | 934.70 KiB |  2032 |
-| Shadow Node     | PlainState         | 100.70 KiB |  973  |
-+-----------------+--------------------+------------+-------+
-|                         TOTAL        |  6.63 MIB  |       |
-+-----------------+--------------------+------------+-------+/
+NA
 ```
 
 In the state expiry version, the archive node will add additional state:
